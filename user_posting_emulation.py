@@ -28,6 +28,17 @@ class AWSDBConnector:
 
 new_connector = AWSDBConnector()
 
+def send_to_kafka(records, topic_name):
+    invoke_url = "https://t5v6ab37u9.execute-api.us-east-1.amazonaws.com/test/" + topic_name
+
+    payload = json.dumps({"records": records})
+    headers = {'Content-Type': 'application/vnd.kafka.json.v2+json'}
+    response = requests.post(invoke_url, headers=headers, data=payload)
+
+    if response.status_code == 200:
+        print(f"Data sent to Kafka topic {topic_name}")
+    else:
+        print(f"Failed to send data to Kafka topic {topic_name}. Status code: {response.status_code}")
 
 def run_infinite_post_data_loop():
     while True:
@@ -55,10 +66,14 @@ def run_infinite_post_data_loop():
             for row in user_selected_row:
                 user_result = dict(row._mapping)
             
-            print(pin_result)
-            print(geo_result)
-            print(user_result)
+            #print(pin_result)
+            #print(geo_result)
+            #print(user_result)
 
+            # Send data to Kafka
+            send_to_kafka(pin_result, "pinterest_topic")
+            send_to_kafka(geo_result, "geolocation_topic")
+            send_to_kafka(user_result, "user_topic")
 
 if __name__ == "__main__":
     run_infinite_post_data_loop()
