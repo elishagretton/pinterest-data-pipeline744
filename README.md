@@ -38,12 +38,6 @@ git clone https://github.com/elishagretton/pinterest-data-pipeline744.git
 cd pinterest-data-pipeline744.git/
 ```
 
-Run the `user_posting_emulation.py` file to retrieve the Pinterest posts data, post geolocation data, and post user data.
-
-```bash
-python user_posting_emulation.py
-```
-
 ## Usage Instructions
 
 This is the final project for the Software Engineering bootcamp with AiCore.
