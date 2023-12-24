@@ -81,8 +81,8 @@ def run_infinite_post_data_loop():
 
             # Send data to Kafka
             send_to_kafka(pin_result, "12c0d092d679.pin")
-            #send_to_kafka(geo_result, "12c0d092d679.geo")
-            #send_to_kafka(user_result, "12c0d092d679.user")
+            send_to_kafka(geo_result, "12c0d092d679.geo")
+            send_to_kafka(user_result, "12c0d092d679.user")
 
 if __name__ == "__main__":
     run_infinite_post_data_loop()
