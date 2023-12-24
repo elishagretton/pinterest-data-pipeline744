@@ -28,10 +28,19 @@ class AWSDBConnector:
 
 new_connector = AWSDBConnector()
 
-def send_to_kafka(records, topic_name):
-    invoke_url = "https://t5v6ab37u9.execute-api.us-east-1.amazonaws.com/test/" + topic_name
+from datetime import datetime
 
-    payload = json.dumps({"records": records})
+def serialize_datetime(obj):
+    """Serialize datetime objects to ISO format."""
+    if isinstance(obj, datetime):
+        return obj.isoformat()
+    raise TypeError("Type not serializable")
+
+def send_to_kafka(records, topic_name):
+    invoke_url = "https://t5v6ab37u9.execute-api.us-east-1.amazonaws.com/test/topics/" + topic_name
+    
+    # Serialize datetime objects using the custom serializer
+    payload = json.dumps({"records": [{"value": records}]}, default=serialize_datetime)
     headers = {'Content-Type': 'application/vnd.kafka.json.v2+json'}
     response = requests.post(invoke_url, headers=headers, data=payload)
 
@@ -71,9 +80,9 @@ def run_infinite_post_data_loop():
             #print(user_result)
 
             # Send data to Kafka
-            send_to_kafka(pin_result, "pinterest_topic")
-            send_to_kafka(geo_result, "geolocation_topic")
-            send_to_kafka(user_result, "user_topic")
+            send_to_kafka(pin_result, "12c0d092d679.pin")
+            #send_to_kafka(geo_result, "12c0d092d679.geo")
+            #send_to_kafka(user_result, "12c0d092d679.user")
 
 if __name__ == "__main__":
     run_infinite_post_data_loop()
