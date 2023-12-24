@@ -66,10 +66,10 @@ zookeeper.connect=z-2.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.c
 bootstrap.servers=b-1.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.com:9098,b-3.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.com:9098,b-2.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.com:9098
 
 # Same as previous IAM authentication
-security.protocol = SASL_SSL
-sasl.mechanism = AWS_MSK_IAM
-sasl.jaas.config = software.amazon.msk.auth.iam.IAMLoginModule required awsRoleArn="arn:aws:iam::584739742957:role/12c0d092d679-ec2-access-role";
-sasl.client.callback.handler.class = software.amazon.msk.auth.iam.IAMClientCallbackHandler
+client.security.protocol = SASL_SSL
+client.sasl.mechanism = AWS_MSK_IAM
+client.sasl.jaas.config = software.amazon.msk.auth.iam.IAMLoginModule required awsRoleArn="arn:aws:iam::584739742957:role/12c0d092d679-ec2-access-role";
+client.sasl.client.callback.handler.class = software.amazon.msk.auth.iam.IAMClientCallbackHandler
 ```
 
 Before sending messages to the API, in order to make sure they are consumed in MSK, the REST proxy is started by running the following commands:
@@ -85,4 +85,4 @@ The proxy is set up correctly when it is clear an INFO server has started and is
 
 To send data to the API, the plugin-connector (created in [Milestone 2](./milestone_2.md)) is used to send data to the MSK Cluster.
 
-To be continued....
+To be continued...
