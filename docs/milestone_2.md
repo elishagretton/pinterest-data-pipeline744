@@ -7,6 +7,8 @@ To do this, we will complete the following steps:
 - Create a custom plugin with MSK Connect using the `Confluent.io Amazon S3 Connector`
 - Create a connector to ensure data passing through the IAM authenticated cluster is automatically stored in the designated S3 bucket.
 
+To view the whole script, please head to [`scripts/milestone_2.sh.`](../scripts/milestone_2.sh)
+
 ## Step 1: Create a custom plugin with MSK Connect
 
 A plugin is created to define the logic of a connector, which will export data from the Kafka topics to S3 objects. We do this by downloading the `Confluent.io Amazon S3 Connector` and copying it to a designated S3 bucket.

@@ -4,8 +4,13 @@ Previously, we established an MSK cluster and created a connector to store data 
 
 In this milestone, we learn:
 
-- How to create a proxy API, create a GET integration, and deploy an API in API Gateway.
-- More to come
+- How to create a proxy API and create a GET integration
+- How to deploy an API in API Gateway.
+- How to configure the Kafka REST Proxy on the EC2 client machine by downloading the Confluent package
+- How to add IAM authentication to the MSK cluster and begin the REST proxy on the EC2 machine.
+- How to modify the `user_posting_emulation.py` to send data to the Kafka topics using the API Invoke URL and how to check this.
+
+To view the whole script, please head to [`scripts/milestone_3.sh.`](../scripts/milestone_3.sh)
 
 ## Step 1: Build a Kafka REST proxy integration method for the API
 
@@ -19,10 +24,10 @@ In the AWS Management console, follow these steps:
 
 - Locate to the `API Gateway`
 - Select `Create Resource`
-- Select `proxy` resource and specify `Resource Name` as `{myProxy+}`. Click `Create Resource`.
+- Turn on the `Proxy Configuration` toggle and specify `Resource Name` as `{proxy+}`. Also `Enable CORS.` Click `Create Resource`.
 - Locate to the `ANY` method and select and click `Edit Integration`.
-- Select `HTTP ANY` method and set the `Endpoint URL` as `http://ec2-3-81-111-233.compute-1.amazonaws.com/{myProxy}`
-- Select `Create integration` and select `Deploy API`.
+- Select a `HTTP` method, turn the `HTTP Proxy` toggle on, select `HTTP ANY` method and set the `Endpoint URL` as `http://ec2-3-81-111-233.compute-1.amazonaws.com:8082/{proxy}`. Select `Create integration`.
+- Finally select `Deploy API`, and create a new stage called `test`.
 
 The proxy integration has now been created for the API.
 
@@ -85,4 +90,30 @@ The proxy is set up correctly when it is clear an INFO server has started and is
 
 To send data to the API, the plugin-connector (created in [Milestone 2](./milestone_2.md)) is used to send data to the MSK Cluster.
 
-To be continued...
+First, ensure the up-to-date API has been deployed and the REST proxy is started on the EC2 client machine.
+
+Now, run the `user_posting_emulation.py` file:
+
+```bash
+python user_posting_emulation.py
+```
+
+In this file, a `send_to_kafka(records, topic_name)` function is created to take the data (`records`) and send it to its corresponding Kafka topic (`topic_name`).
+
+The invoke URL comes in the format `https://YourAPIInvokeURL/test/topics/<AllYourTopics>`.
+
+For this example, the invoke URL is `https://t5v6ab37u9.execute-api.us-east-1.amazonaws.com/test/topics/ + topic_name`, where the topic names are: `12c0d092d679.pin`, `12c0d092d679.geo`, `12c0d092d679.user`.
+
+The `records` do contain some `datetime` data which caused as error when serialising the Python dictionaries to JSON format. Consequently, the `serialize_datetime(obj)` function is created to serialise `datetime` objects to ISO format. This format is a common practise when working with JSON files as it represents the date and time in a standardised format e.g. `YYYY-MM-DDTHH:MM:SS.sssZ`.
+
+Please see [user_posting_emulation.py](../user_posting_emulation.py) for a closer look at the code.
+
+To check if the topics have been created correctly, head to the S3 section of the AWS Management console. Locate to the bucket and notice how the connector has created the corresponding topics: `topics/<your_UserId>.pin/partition=0/`, `topics/<your_UserId>.geo/partition=0/`, and `topics/<your_UserId>.user/partition=0/`.
+
+## Conclusion
+
+We have successfully configured an API that receives data, which is then sent to the MSK Cluster using the plugin-connector pair previously created.
+
+To see the full script of this section, please see [scripts/milestone_3.sh.](../scripts/milestone_3.sh)
+
+In the next milestone, we set up a Databricks account to read information from AWS. We will mount the S3 bucket to Databricks in order to clean and query your batch data. Please see the next milestone [here.](./milestone_4.ipynb)
