@@ -98,7 +98,9 @@ Now, run the `user_posting_emulation.py` file:
 python user_posting_emulation.py
 ```
 
-In this file, a `send_to_kafka(records, topic_name)` function is created to take the data (`records`) and send it to its corresponding Kafka topic (`topic_name`).
+Make sure to run this file for multiple iterations (5-10 minutes) as this ensures enough data is sent to the Kafka topics to be investigated later in Databricks.
+
+To discuss the `user_posting_emulation.py` file, a `send_to_kafka(records, topic_name)` function is created to take the data (`records`) and send it to its corresponding Kafka topic (`topic_name`).
 
 The invoke URL comes in the format `https://YourAPIInvokeURL/test/topics/<AllYourTopics>`.
 
@@ -116,4 +118,4 @@ We have successfully configured an API that receives data, which is then sent to
 
 To see the full script of this section, please see [scripts/milestone_3.sh.](../scripts/milestone_3.sh)
 
-In the next milestone, we set up a Databricks account to read information from AWS. We will mount the S3 bucket to Databricks in order to clean and query your batch data. Please see the next milestone [here.](./milestone_4.ipynb)
+In the next milestone, we set up a Databricks account to read information from AWS. We will mount the S3 bucket to Databricks in order to clean and query your batch data. Please see the next milestone [here.](./milestone_4.md)
