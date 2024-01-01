@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 #Define params for Submit Run Operator
 notebook_task = {
-    'notebook_path': 'https://dbc-b54c5c54-233d.cloud.databricks.com/?o=1865928197306450#notebook/3452049211260468',
+    'notebook_path': '/Users/elishagretton@gmail.com/databricks'
 }
 
 
