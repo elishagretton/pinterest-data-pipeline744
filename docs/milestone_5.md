@@ -23,7 +23,7 @@ The DAG can be seen in the file [scripts/12c0d092d679_dag.py](../scripts/12c0d09
 
 For this DAG, the parameters are as follows:
 
-- `notebook_path`: path to the Databricks file created in Milestone 4 (`https://dbc-b54c5c54-233d.cloud.databricks.com/?o=1865928197306450#notebook/3452049211260468`)
+- `notebook_path`: path to the Databricks file created in Milestone 4 (`/Users/elishagretton@gmail.com/databricks`)
 - `start_date`: the date the DAG begins (here it begins on 30/12/23, `datetime(2023, 12, 30)`)
 - `schedule_interval`: the DAG is ran daily (`'@daily'`)
 - `existing_cluster_id`: cluster id of Databricks cluster (`1108-162752-8okw8dgg`)
