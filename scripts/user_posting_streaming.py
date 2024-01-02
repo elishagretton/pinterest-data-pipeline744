@@ -6,6 +6,8 @@ import boto3
 import json
 import sqlalchemy
 from sqlalchemy import text
+import uuid
+from datetime import datetime
 
 
 random.seed(100)
@@ -28,19 +30,21 @@ class AWSDBConnector:
 
 new_connector = AWSDBConnector()
 
-from datetime import datetime
-
-def serialize_datetime(obj):
-    """Serialize datetime objects to ISO format."""
-    if isinstance(obj, datetime):
-        return obj.isoformat()
-    raise TypeError("Type not serializable")
-
+class DateTimeEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            return obj.isoformat()
+        return super().default(obj)
+    
 def send_to_kinesis(records, stream_name):
     invoke_url = f'https://t5v6ab37u9.execute-api.us-east-1.amazonaws.com/test/streams/' + stream_name + '/record/'
-    print(records)
-    
-    payload = json.dumps({"Record": [records]}, default=serialize_datetime)
+
+    payload = json.dumps({
+        "StreamName": stream_name,
+        "Data": records,
+        "PartitionKey": str(uuid.uuid4())
+    }, cls=DateTimeEncoder)
+    #print(records)
     print(payload)
     headers = {'Content-Type': 'application/json'}
     response = requests.request("PUT", invoke_url, headers=headers, data=payload)
@@ -82,9 +86,8 @@ def run_infinite_post_data_loop():
             #print(geo_result)
             #print(user_result)
             send_to_kinesis(pin_result, 'streaming-12c0d092d679-pin')
-            #send_to_kinesis(geo_result, 'streaming-12c0d092d679-geo')
-            #send_to_kinesis(user_result, 'streaming-12c0d092d679-user')
-            #print(type(pin_result))
+            send_to_kinesis(geo_result, 'streaming-12c0d092d679-geo')
+            send_to_kinesis(user_result, 'streaming-12c0d092d679-user')
             
  
 if __name__ == "__main__":
