@@ -37,12 +37,14 @@ def serialize_datetime(obj):
     raise TypeError("Type not serializable")
 
 def send_to_kinesis(records, stream_name):
-    invoke_url = f'https://t5v6ab37u9.execute-api.us-east-1.amazonaws.com/test/streams/' + stream_name + '/records/'
-
-    payload = json.dumps({"records": [{"value": records}]}, default=serialize_datetime)
+    invoke_url = f'https://t5v6ab37u9.execute-api.us-east-1.amazonaws.com/test/streams/' + stream_name + '/record/'
+    print(records)
+    
+    payload = json.dumps({"Record": [records]}, default=serialize_datetime)
+    print(payload)
     headers = {'Content-Type': 'application/json'}
     response = requests.request("PUT", invoke_url, headers=headers, data=payload)
-    
+    print(response.json())
     if response.status_code == 200:
         print(f"Data sent to Kinesis stream for {stream_name}")
     else:
@@ -75,15 +77,19 @@ def run_infinite_post_data_loop():
             for row in user_selected_row:
                 user_result = dict(row._mapping)
             
+     
             #print(pin_result)
             #print(geo_result)
             #print(user_result)
             send_to_kinesis(pin_result, 'streaming-12c0d092d679-pin')
-            send_to_kinesis(geo_result, 'streaming-12c0d092d679-geo')
-            send_to_kinesis(user_result, 'streaming-12c0d092d679-user')
+            #send_to_kinesis(geo_result, 'streaming-12c0d092d679-geo')
+            #send_to_kinesis(user_result, 'streaming-12c0d092d679-user')
+            #print(type(pin_result))
+            
  
 if __name__ == "__main__":
     run_infinite_post_data_loop()
+    
     print('Working')
     
     
