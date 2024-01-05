@@ -16,7 +16,7 @@ To connect the cluster to the S3 bucket, we will complete the following steps:
 - Create a custom plugin with MSK Connect using the `Confluent.io Amazon S3 Connector`
 - Create a connector to ensure data passing through the IAM authenticated cluster is automatically stored in the designated S3 bucket.
 
-To view the whole script, please head to [`scripts/milestone_2.sh.`](../scripts/milestone_2.sh)
+To view the whole script, please head to [`scripts/milestones/milestone_2.sh.`](../scripts/milestones/milestone_2.sh)
 
 ## Step 1: Create a custom plugin with MSK Connect
 
@@ -92,6 +92,6 @@ The connector is now created. Data passing through the MSK cluster is automatica
 
 We have successfully created a plugin and a connector using the Confluent.io Amazon S3 Connector and AWS.
 
-To see the full script of this section, please see [scripts/milestone_2.sh.](../scripts/milestone_2.sh)
+To see the full script of this section, please see [scripts/milestones/milestone_2.sh.](../scripts/milestones/milestone_2.sh)
 
 In the next milestone, we build an API to send data to the MSK cluster and store the data in the S3 bucket using the connector. Please see the next milestone [here.](./milestone_3.md)

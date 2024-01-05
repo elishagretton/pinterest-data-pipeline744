@@ -22,7 +22,7 @@ In this section, we deal with **batch data**. This refers to a group of data poi
 
 Before extracting the pin-related data using batch processing, I first plan to create a EC2 instance to handle the data processing workload. I plan to achieve this by configuring a EC2 Kafka clinet to create the instance, and then connecting the instance to a MSK cluster. The cluster is used to create several Kafka topics to store the Pinterest posts data, geolocation data, and user data.
 
-To view the whole script, please head to [`scripts/milestone_1.sh.`](../scripts/milestone_1.sh)
+To view the whole script, please head to [`scripts/milestones/milestone_1.sh.`](../scripts/milestones/milestone_1.sh)
 
 ## Step 1: Connect to the EC2 instance
 
@@ -155,6 +155,6 @@ In this tutorial,
 - We downloaded Kafka and the IAM MSK authentication package and configured the EC2 client to use AWS IAM for cluster authentication.
 - We created topics for the Pinterest posts data, post geolocation data, and post user data, to organise and segragrate the data.
 
-To see the whole script, please head to [`scripts/milestone_1.sh.`](../scripts/milestone_1.sh)
+To see the whole script, please head to [`scripts/milestones/milestone_1.sh.`](../scripts/milestones/milestone_1.sh)
 
 In the next milestone, we connect the MSK cluster to a S3 bucket. This ensures data in the cluster is automatically saved and stored in the dedicated S3 bucket. Please see the next milestone [here.](./milestone_2.md)

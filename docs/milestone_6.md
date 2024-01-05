@@ -2,7 +2,15 @@
 
 In this milestone, we will now look at real-time streaming data. This is when there is a continuous flow of data that is generated, processed, and analysed without significant delay. The data is processed as it is generated or received, and is not stored and then processed in batch mode.
 
-We learn:
+There are many positives to streaming data, for example:
+
+- Driving data-driven decisions in real-time, providing immediate results.
+- Early detection of issues.
+- Quick response to events.
+- Improved customer experiences.
+- And many more!
+
+In this final section, we learn:
 
 - How to create streams in AWS Kinesis
 - How to configure an API to set up streams
@@ -31,7 +39,7 @@ To create the streams in AWS:
 - For the capacity mode, select `On demand`.
 - Click `Create Data Stream`
 
-Now there should be three streams for each dataframe. Currently, these streams are empty. Next, we will build an API and write code to send data to these streams in real-time.
+Now there should be three streams for each dataframe. Currently, these streams are empty. Next, we build an API and write code to send data to these streams in real-time.
 
 ## Step 2: Configure the API with Kinesis proxy integration
 
@@ -41,13 +49,13 @@ Now we build an API that grants the necessary permissions for my authorised IAM 
 - Create, describe and delete streams in Kinesis
 - Add records to streams in Kinesis
 
-#TODO: WRITE UP INSTRUCTIONS HERE
+To do this, I followed the instructions from a notebook provided by AiCore. The instructions are long, however easy to follow from the notebook. The notebook can be viewed at this [link](https://colab.research.google.com/github/AI-Core/Content-Public/blob/main/Content/units/Cloud-and-DevOps/4.%20AWS%20Serverless%20API%20Stack/3.%20Integrating%20API%20Gateway%20with%20Kinesis/Notebook.ipynb).
 
 ## Step 3: Stream data using the API
 
-Now to leverage the API, I created the file [scripts/user_posting_streaming.py](../scripts/processing/user_posting_streaming.py) to stream the real-time data.
+Now to leverage the API, I created the file [user_posting_streaming.py](../scripts/processing/user_posting_streaming.py) to stream the real-time data.
 
-In the file, I created the `send_to_kinesis(records, stream_name)` function as follows:
+In the file, I created the `send_to_kinesis(records, stream_name)` function to accept the records from the pin-related data and send the data to its corresponding stream name. The function is as follows:
 
 ```python
 def send_to_kinesis(records, stream_name):
@@ -87,7 +95,7 @@ For now, leave the command running as this ensures enough data is being sent to 
 
 # Step 4: Read data in Databricks
 
-Now the data is being sent to AWS Kinesis. We want to be able to read, clean and write to the data in Databricks.
+Now the data is being sent to AWS Kinesis. We want to read, clean and write the data to Databricks.
 
 To see the full implementation, please see the notebook [here.](../scripts/milestones/milestone_6.ipynb)
 
@@ -176,9 +184,7 @@ Below you can see the data has been uploaded after clicking on `Sample Data`
 
 So that's it!
 
-In this milestone, we created an end-to-end data pipeline. We created streams in Kinesis and created an API to send the pin-related data to Kinesis. The data from these streams was then read in Databricks. The data was cleaned and then written to Delta tables in Databricks.
-
-This was done in real-time as the data was being streamed.
+In this milestone, we created an end-to-end data pipeline for streaming data. We created streams in Kinesis and created an API to send the pin-related data to Kinesis. The data from these streams was then read in Databricks. The data was cleaned and then written to Delta tables.
 
 From this, the next step could involve processing, analysing, and managing the data. For example:
 

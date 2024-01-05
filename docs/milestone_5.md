@@ -20,7 +20,7 @@ In summary, this setup allows you to use the powerful job orchestration capabili
 
 # Step 1: Set up the DAG
 
-The DAG can be seen in the file [scripts/12c0d092d679_dag.py](../scripts/12c0d092d679_dag.py).
+The DAG can be seen in the file [12c0d092d679_dag.py](../scripts/processing/12c0d092d679_dag.py).
 
 For this DAG, the parameters are as follows:
 
@@ -49,10 +49,12 @@ Hover over the little blocks to see the status of the file. Once the status is *
 
 If the status fails, click on the red box of colour at the bottom and click Logs. This will show the errors.
 
-# Conclusion
+# Conclusion
 
-Now the DAG has been created and we have used a bit of Airflow UI.
+Now the DAG has been created and triggered in Airflow UI. This is the last step for the batch data.
 
-In the next milestone, we will set up AWS Kinesis to send streaming data to Databricks.
+The batch data has been uploaded, cleaned and then sent to AWS MWAA for further processing to orchestrate the data workflow.
+
+In the next milestone, we are introduced to streaming data. This is data that is being sent in real-time. AWS Kinesis is used to deal with such data and the data is then to Databricks in real time to read, clean, and write to Delta tables.
 
 Please see the next milestone [here.](./milestone_6.md)
