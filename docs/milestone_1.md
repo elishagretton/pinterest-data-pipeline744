@@ -1,4 +1,4 @@
-# Milestone 1: Configure the EC2 Kafka Client
+# Milestone 1: Batch data and configuring the EC2 Kafka Client
 
 ## Getting Started
 
@@ -13,15 +13,20 @@ cd pinterest-data-pipeline744.git/
 
 I have downloaded the Pinterest infrastructure and signed into the AWS console using the credentials provided by AiCore.
 
-In this section, I plan to configure a EC2 Kafka client by creating a EC2 instance and connecting it to the Kafka cluster. An EC2 instance is used as they are scalable, cost-effective, and easy to configure.
+In this section, we deal with **batch data**. This refers to a group of data points that are processed as a single unit. There are many advantages to processing batch data, such as:
 
-Following this, several Kafka topics are created to store the Pinterest posts data, post geolocation data, and post user data.
+- Being more computationally efficient than processing individual data points at a time.
+- Cost-effective for large datasets as there is less need for continuous monitoring and immediate responsiveness.
+- Consistency as the entire dataset is processed together with the same rules and algorithms.
+- And many more!
+
+Before extracting the pin-related data using batch processing, I first plan to create a EC2 instance to handle the data processing workload. I plan to achieve this by configuring a EC2 Kafka clinet to create the instance, and then connecting the instance to a Kafka cluster. The cluster is used to create several Kafka topics to store the Pinterest posts data, geolocation data, and user data.
 
 To view the whole script, please head to [`scripts/milestone_1.sh.`](../scripts/milestone_1.sh)
 
 ## Step 1: Connect to the EC2 instance
 
-Before connecting to the EC2 instance, a `Key pair name.pem` file is created, which contains the contents of my `KeyPairId` given from AiCore.
+Before connecting to the EC2 instance, a `Key pair name.pem` file is created, which contains the authentication credentials given from AiCore to complete this project.
 
 Using this information, open the terminal and locate to the folder for the repository and run:
 
@@ -29,7 +34,7 @@ Using this information, open the terminal and locate to the folder for the repos
 ssh -i "Key pair name.pem" ec2-user@ec2-3-81-111-233.compute-1.amazonaws.com
 ```
 
-We connect to the EC2 instance using:
+We connect to the EC2 instance on our local machine by using:
 
 - `ssh`: the SSH client.
 - `-i "Key pair name.pem"`: the private key for authentication of the EC2 instance.
@@ -37,7 +42,7 @@ We connect to the EC2 instance using:
 
 ## Step 2: Set up Kafka on the EC2 instance
 
-Now we are connected to the EC2 instance, we need to install Kafka on the client EC2 machine.
+Now we are connected to the EC2 instance, we need to install Kafka on the client EC2 machine. This allows us to connect the instance to the Kafka cluster.
 
 First install Java on the EC2 instance.
 
@@ -71,7 +76,7 @@ export CLASSPATH=/home/ec2-user/kafka_2.12-2.8.1/libs/aws-msk-iam-auth-1.1.5-all
 
 Make sure that the specified path is the same as on your EC2 client machine.
 
-Now we can configure the EC2 client to use AWS IAM for cluster authentication. This is done in the AWS Management console with the following steps:
+Now we can configure the EC2 client to use AWS IAM for cluster authentication. We do this to provide control and security over who assesses the cluster. This is done in the AWS Management console with the following steps:
 
 - Navigate to IAM console
 - Select `Roles`
@@ -109,7 +114,7 @@ sasl.client.callback.handler.class = software.amazon.msk.auth.iam.IAMClientCallb
 
 ## Step 3: Create Kafka topics
 
-Now the EC2 client is configured to use AWS IAM authentication to connect to the cluster, we then create Kafka topics to store the Pinterest posts data, post geolocation data, and post user data. We use Kafka topics as they organise and segregrate the data.
+Now the EC2 client is configured to use AWS IAM authentication to connect to the cluster, we then create Kafka topics to store the Pinterest posts data, geolocation data, and user data. We use Kafka topics as they organise and segregrate the data.
 
 To do this, we use the AWS management console on the MSK cluster to note:
 
@@ -128,13 +133,13 @@ Create the topic `12c0d092d679.pin` for the Pinterest posts data using the below
 ./kafka-topics.sh --bootstrap-server b-1.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.com:9098,b-3.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.com:9098,b-2.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.com:9098 --command-config client.properties --create --topic 12c0d092d679.pin
 ```
 
-Create the topic `12c0d092d679.geo` for the post geolocation data using the below code.
+Create the topic `12c0d092d679.geo` for the geolocation data using the below code.
 
 ```bash
 ./kafka-topics.sh --bootstrap-server b-1.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.com:9098,b-3.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.com:9098,b-2.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.com:9098 --command-config client.properties --create --topic 12c0d092d679.geo
 ```
 
-Create the topic `12c0d092d679.user` for the post user data using the below code.
+Create the topic `12c0d092d679.user` for the user data using the below code.
 
 ```bash
 ./kafka-topics.sh --bootstrap-server b-1.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.com:9098,b-3.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.com:9098,b-2.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.com:9098 --command-config client.properties --create --topic 12c0d092d679.user
@@ -152,4 +157,4 @@ In this tutorial,
 
 To see the whole script, please head to [`scripts/milestone_1.sh.`](../scripts/milestone_1.sh)
 
-In the next milestone, we will connect the MSK cluster to a S3 bucket. This ensures data in the cluster is automatically saved and stored in the dedicated S3 bucket. Please see the next milestone [here.](./milestone_2.md)
+In the next milestone, we connect the MSK cluster to a S3 bucket. This ensures data in the cluster is automatically saved and stored in the dedicated S3 bucket. Please see the next milestone [here.](./milestone_2.md)
