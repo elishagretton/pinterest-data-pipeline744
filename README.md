@@ -83,7 +83,8 @@ The project is structured as follows:
     - `milestone_2.sh`: Script file for connecting a MSK cluster to an S3 bucket, discussed in `milestone_2.md`
     - `milestone_3.sh`: Script file for building an API to send batch data to Kafka topics, discussed in `milestone_3.md`
     - `milestone_4.ipynb`: Databricks file for cleaning and querying batch data, discussed in more detail in `milestone_4.md`.
-    - `milestone_6.ipynb`: Databricks file for reading and cleaning streaming data, and writing to Delta tables, discussed in more detail in `milestone_6.md`. -**/processing**:
+    - `milestone_6.ipynb`: Databricks file for reading and cleaning streaming data, and writing to Delta tables, discussed in more detail in `milestone_6.md`.
+  - **/processing**:
     - `12c0d092d679-dag.py`: DAG file to orchestrate Databricks workload for batch data in AWS MWAA, discussed in `milestone_5.md`.
     - `user_posting_emulation.py`: Python file for extracting data from a RDS database on pins, geo-location, and users, and for sending batch data to Kafka topics.
     - `user_posting_streaming.py`: Python file for extracting data from a RDS database on pins, geo-location, and users and sending the real-time streaming data to AWS Kinesis.
