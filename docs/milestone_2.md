@@ -1,8 +1,17 @@
 # Milestone 2: Connect a MSK cluster to a S3 bucket
 
-In this section, we will connect a MSK cluster to a S3 bucket. This ensures any data passing through the cluster will be automatically saved and stored in a dedicated S3 bucket.
+Previously, we set up a EC2 instance and connected it to a MSK cluster. Three Kafka topics were created by the cluster to store the pin-related data.
 
-To do this, we will complete the following steps:
+In this section, we connect the MSK cluster to a S3 bucket. This ensures any data passing through the cluster will be automatically saved and stored in a dedicated S3 bucket.
+
+There are many positives to storing data in this way, for example:
+
+- **Data Backup and Recovery:** data stored in S3 can easily be recovered if lost, making it reliable.
+- **Data Sharing:** S3 allows data to be shared easily with others.
+- **Scalability:** data stored in S3 can be scaled horizontally to handle growing amounts of data.
+- And many more!
+
+To connect the cluster to the S3 bucket, we will complete the following steps:
 
 - Create a custom plugin with MSK Connect using the `Confluent.io Amazon S3 Connector`
 - Create a connector to ensure data passing through the IAM authenticated cluster is automatically stored in the designated S3 bucket.
@@ -81,8 +90,8 @@ The connector is now created. Data passing through the MSK cluster is automatica
 
 ## Conclusion
 
-We have successfully created a plugin and a connector using the `Confluent.io Amazon S3 Connector` and `AWS`.
+We have successfully created a plugin and a connector using the Confluent.io Amazon S3 Connector and AWS.
 
 To see the full script of this section, please see [scripts/milestone_2.sh.](../scripts/milestone_2.sh)
 
-In the next milestone, we will build our own API to send data to the MSK cluster and store the data in the S3 bucket using the connector. Please see the next milestone [here.](./milestone_3.md)
+In the next milestone, we build an API to send data to the MSK cluster and store the data in the S3 bucket using the connector. Please see the next milestone [here.](./milestone_3.md)
