@@ -10,26 +10,33 @@
 
 ## Introduction
 
-Pinterest crunches billions of data points every day to decide how to provide more value to their users. In this project, a similar system is created using the AWS Cloud.
+Pinterest crunches billions of data points every day to decide how to provide more value to their users. In this project, a similar system is created to process batch and streaming data using the AWS Cloud.
+
+The end-to-end data pipelines looks like this:
+![CloudPinterestPipeline](images/CloudPinterestPipeline.png)
 
 The key tools in this project include:
 
 - **Apache Kafka**: to analyse and streamline the Pinterest data pipeline.
-- **AWS EC2**: to create an EC2 client machine.
-- **AWS IAM**: to use IAM User authentication on the MSK Cluster.
-- **AWS MSK**: to manage the cluster, create custom plugins and connectors, and many more.
+- **AWS EC2**: to create an EC2 instance to handle the batch data processing workload.
+- **AWS IAM**: to use IAM User authentication on the MSK Cluster for batch data, and for Kinesis access for streaming data.
+- **AWS MSK**: to manage the cluster, create custom plugins and connectors for batch data.
 - **Databricks**: to read, clean, query, and write batch and streaming data.
-- **AWS MWAA**: to monitor the workflow of data-related tasks, specially in a DAG.
-- **Airflow UI**: interface to monitor the workflow of the DAG.
+- **AWS MWAA**: to monitor the workflow of batch data-related tasks, specially in a DAG.
+- **Airflow UI**: interface to monitor the workflow of the DAG for batch data.
+- **AWS Kinesis**: to store and process streaming data.
 
 In this project, we learn:
 
 1. How to connect to AWS
-2. How to configure a EC2 Kafka client using an EC2 instance, an authorised IAM user, and MSK to manage the cluster.
-3. How to create a custom plugin in MSK Connect and connect the plugin to the cluster.
-4. The list will grow as I develop the project!
-
-TODO: Create a flow-chart/diagram of the data pipeline/process. Insert and explain here.
+2. The difference between batch and streaming data..
+3. How to configure a EC2 Kafka client using an EC2 instance and an authorised IAM user to handle batch data.
+4. How to connect the instance to an MSK cluster and send the batch data to an S3 bucket.
+5. How to configure an API to allow batch data to be transmitted to the MSK cluster, which is then stored in the bucket.
+6. How to read, clean and query the batch data in Databricks to generate insights.
+7. How to create a DAG to monitor the workflow of batch data.
+8. How to create streams and send streaming data using AWS Kinesis.
+9. How to read, clean, and upload streaming data to Delta tables in Databricks.
 
 ## Installation Instructions
 
@@ -46,7 +53,7 @@ This is the final project for the Software Engineering bootcamp with AiCore.
 
 I have been given a temporary AWS account with access to a number of paid AWS services.
 
-To use the project and leverage the MSK Connect features, I suggest reading more on AWS pricing options for MSK Connect [here.](https://aws.amazon.com/msk/pricing/)
+To use the project and leverage paid AWS feature, find out more on the [AWS website.](https://aws.amazon.com/console/)
 
 ## File Structure
 
@@ -54,15 +61,16 @@ The project is structured as follows:
 
 - **/docs**: Contains documentation files on each milestone of the project.
 
-  - `milestone_1.md`: Configures the EC2 Kafka client machine.
-  - `milestone_2.md`: Connects a MSK cluster to a S3 bucket
-  - `milestone_3.md`: Configures an API in API Gateway.
-  - `milestone_4.md`:
-  - `milestone_5.md`:
-  - `milestone_6.md`:
+  - `milestone_1.md`: Configures the EC2 instance and connects to MSK cluster for batch data.
+  - `milestone_2.md`: Connects the MSK cluster to a S3 bucket for batch data to be stored.
+  - `milestone_3.md`: Configures an API in API Gateway to send batch data to Kafka topics.
+  - `milestone_4.md`: Reads, cleans, and queries batch data in Databricks to generate insights.
+  - `milestone_5.md`: Creates and triggers a DAG to manage the workflow of tasks for the batch data.
+  - `milestone_6.md`: Creates streams and sends streaming data to AWS Kinesis. Data is then streamed to Databricks to be read, cleaned, and written to Delta tables.
 
 - **/images**: Contains image files for documentation.
 
+  - `CloudPinterestPipeline`: End-to-end data pipeline visualisation for batch and streaming data.
   - `m5-img1.png`: Image for milestone 5. Image of Airflow UI with uploaded DAG.
   - `m5-img2.png`: Image for milestone 5. Image of Airflow UI with DAG status.
   - `m6-img1.png`: Image for milestone 6. Image of data streaming to Kinesis in terminal.
