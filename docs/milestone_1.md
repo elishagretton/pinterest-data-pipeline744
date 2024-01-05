@@ -20,7 +20,7 @@ In this section, we deal with **batch data**. This refers to a group of data poi
 - Consistency as the entire dataset is processed together with the same rules and algorithms.
 - And many more!
 
-Before extracting the pin-related data using batch processing, I first plan to create a EC2 instance to handle the data processing workload. I plan to achieve this by configuring a EC2 Kafka clinet to create the instance, and then connecting the instance to a Kafka cluster. The cluster is used to create several Kafka topics to store the Pinterest posts data, geolocation data, and user data.
+Before extracting the pin-related data using batch processing, I first plan to create a EC2 instance to handle the data processing workload. I plan to achieve this by configuring a EC2 Kafka clinet to create the instance, and then connecting the instance to a MSK cluster. The cluster is used to create several Kafka topics to store the Pinterest posts data, geolocation data, and user data.
 
 To view the whole script, please head to [`scripts/milestone_1.sh.`](../scripts/milestone_1.sh)
 
@@ -42,7 +42,7 @@ We connect to the EC2 instance on our local machine by using:
 
 ## Step 2: Set up Kafka on the EC2 instance
 
-Now we are connected to the EC2 instance, we need to install Kafka on the client EC2 machine. This allows us to connect the instance to the Kafka cluster.
+Now we are connected to the EC2 instance, we need to install Kafka on the client EC2 machine. This allows us to connect the instance to the MSK cluster.
 
 First install Java on the EC2 instance.
 
