@@ -1,6 +1,6 @@
 # Milestone 3: Configuring an API on API Gateway
 
-Previously, we established an MSK cluster and created a connector to store data in the S3 bucket. In this milestone, we will build an API to allow data transmission to the MSK cluster.
+Previously, we established an MSK cluster and created a connector to store data in the S3 bucket. In this milestone, we build an API to allow data to be transmitted to the cluster, which is then stored in the bucket.
 
 In this milestone, we learn:
 
@@ -112,10 +112,10 @@ Please see [user_posting_emulation.py](../user_posting_emulation.py) for a close
 
 To check if the topics have been created correctly, head to the S3 section of the AWS Management console. Locate to the bucket and notice how the connector has created the corresponding topics: `topics/<your_UserId>.pin/partition=0/`, `topics/<your_UserId>.geo/partition=0/`, and `topics/<your_UserId>.user/partition=0/`.
 
-## Conclusion
+## Conclusion
 
 We have successfully configured an API that receives data, which is then sent to the MSK Cluster using the plugin-connector pair previously created.
 
 To see the full script of this section, please see [scripts/milestone_3.sh.](../scripts/milestone_3.sh)
 
-In the next milestone, we set up a Databricks account to read information from AWS. We will mount the S3 bucket to Databricks in order to clean and query your batch data. Please see the next milestone [here.](./milestone_4.md)
+In the next milestone, we set up a Databricks account to read information from AWS. We mount the S3 bucket to Databricks in order to clean and query your batch data. Please see the next milestone [here.](./milestone_4.md)
