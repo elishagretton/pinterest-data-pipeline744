@@ -61,31 +61,31 @@ The project is structured as follows:
 
 - **/docs**: Contains documentation files on each milestone of the project.
 
-  - `milestone_1.md`: Configures the EC2 instance and connects to MSK cluster for batch data.
-  - `milestone_2.md`: Connects the MSK cluster to a S3 bucket for batch data to be stored.
-  - `milestone_3.md`: Configures an API in API Gateway to send batch data to Kafka topics.
-  - `milestone_4.md`: Reads, cleans, and queries batch data in Databricks to generate insights.
-  - `milestone_5.md`: Creates and triggers a DAG to manage the workflow of tasks for the batch data.
-  - `milestone_6.md`: Creates streams and sends streaming data to AWS Kinesis. Data is then streamed to Databricks to be read, cleaned, and written to Delta tables.
+  - `batch-data-ec2-kafka-client-configuration.md`: Configures the EC2 instance and connects to MSK cluster for batch data.
+  - `batch-data-msk-s3-connection.md`: Connects the MSK cluster to a S3 bucket for batch data to be stored.
+  - `batch-data-api-configuration.md`: Configures an API in API Gateway to send batch data to Kafka topics.
+  - `batch-data-processing-databricks.md`: Reads, cleans, and queries batch data in Databricks to generate insights.
+  - `batch-data-workflow-management.md`: Creates and triggers a DAG to manage the workflow of tasks for the batch data.
+  - `streaming-data-pipeline.md`: Creates streams and sends streaming data to AWS Kinesis. Data is then streamed to Databricks to be read, cleaned, and written to Delta tables.
 
 - **/images**: Contains image files for documentation.
 
   - `CloudPinterestPipeline`: End-to-end data pipeline visualisation for batch and streaming data.
-  - `m5-img1.png`: Image for milestone 5. Image of Airflow UI with uploaded DAG.
-  - `m5-img2.png`: Image for milestone 5. Image of Airflow UI with DAG status.
-  - `m6-img1.png`: Image for milestone 6. Image of data streaming to Kinesis in terminal.
-  - `m6-img2.png`: Image for milestone 6. Image of sample data in Delta tables in Databricks.
+  - `batch-data-uploaded-dag.png`: Image for `batch-data-workflow-management.md`. Image of Airflow UI with uploaded DAG.
+  - `batch-data-dag-status.png`: Image for `batch-data-workflow-management.md`. Image of Airflow UI with DAG status.
+  - `streaming-data-kinesis-terminal.png`: Image for `streaming-data-pipeline.md`. Image of data streaming to Kinesis in terminal.
+  - `streaming-data-delta-tables.png`: Image for `streaming-data-pipeline.md`. Image of sample data in Delta tables in Databricks.
 
 - **/scripts**: Contains code files for milestone implementation and data processing.
 
   - **/milestones**: Contains code files for implementation of each milestone.
-    - `milestone_1.sh`: Script file for configuring a EC2 Kafka client to process batch data, discussed in `milestone_1.md`
-    - `milestone_2.sh`: Script file for connecting a MSK cluster to an S3 bucket, discussed in `milestone_2.md`
-    - `milestone_3.sh`: Script file for building an API to send batch data to Kafka topics, discussed in `milestone_3.md`
-    - `milestone_4.ipynb`: Databricks file for cleaning and querying batch data, discussed in more detail in `milestone_4.md`.
-    - `milestone_6.ipynb`: Databricks file for reading and cleaning streaming data, and writing to Delta tables, discussed in more detail in `milestone_6.md`.
+    - `batch-data-ec2-kafka-client-configuration.sh`: Script file for configuring a EC2 Kafka client to process batch data, discussed in `batch-data-ec2-kafka-client-configuration.md`
+    - `batch-data-msk-s3-connection.sh`: Script file for connecting a MSK cluster to an S3 bucket, discussed in `batch-data-msk-s3-connection.md`
+    - `batch-data-api-configuration.sh`: Script file for building an API to send batch data to Kafka topics, discussed in `batch-data-api-configuration.md`
+    - `batch-data-processing-databricks.ipynb`: Databricks file for cleaning and querying batch data, discussed in more detail in `batch-data-processing-databricks.md`.
+    - `streaming-data-pipeline.ipynb`: Databricks file for reading and cleaning streaming data, and writing to Delta tables, discussed in more detail in `streaming-data-pipeline.md`.
   - **/processing**:
-    - `12c0d092d679-dag.py`: DAG file to orchestrate Databricks workload for batch data in AWS MWAA, discussed in `milestone_5.md`.
+    - `12c0d092d679-dag.py`: DAG file to orchestrate Databricks workload for batch data in AWS MWAA, discussed in `batch-data-workflow-management.md`.
     - `user_posting_emulation.py`: Python file for extracting data from a RDS database on pins, geo-location, and users, and for sending batch data to Kafka topics.
     - `user_posting_streaming.py`: Python file for extracting data from a RDS database on pins, geo-location, and users and sending the real-time streaming data to AWS Kinesis.
 
