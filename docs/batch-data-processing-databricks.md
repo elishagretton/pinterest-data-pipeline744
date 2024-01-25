@@ -10,7 +10,7 @@ Now, we use Databricks to take a closer look at the data in these topics. In thi
 - How to clean and transform each dataframe in Spark
 - How to query the dataframes to gain insights on the Pinterest-related data.
 
-To see the full Spark script for this section, please see [milestone_4.ipynb](../scripts/milestones/milestone_4.ipynb).
+To see the full Spark script for this section, please see [batch-data-processing-databricks.ipynb](../scripts/milestones/batch-data-processing-databricks.ipynb).
 
 The full Spark script is split into **four** tasks:
 

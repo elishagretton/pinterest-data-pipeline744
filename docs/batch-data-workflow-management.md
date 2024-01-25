@@ -40,12 +40,12 @@ On the right, click the Open Airflow UI button.
 Find the DAG `12c0d092d679_dag` and click the play button.
 
 Once the dag is running, click on the dag.
-![Screenshot 1](../images/m5-img1.png)
+![Screenshot 1](../images/batch-data-uploaded-dag.png)
 
 To see if the dag is running, there are little blocks of colour showing the status of the file.
 
 Hover over the little blocks to see the status of the file. Once the status is **running** and then turns to **success**, the DAG has successfully been run! Just like this:
-![Screenshot 2](../images/m5-img2.png)
+![Screenshot 2](../images/batch-data-dag-status.png)
 
 If the status fails, click on the red box of colour at the bottom and click Logs. This will show the errors.
 
@@ -57,4 +57,4 @@ The batch data has been uploaded, cleaned and then sent to AWS MWAA for further 
 
 In the next milestone, we are introduced to streaming data. This is data that is being sent in real-time. AWS Kinesis is used to deal with such data and the data is then to Databricks in real time to read, clean, and write to Delta tables.
 
-Please see the next milestone [here.](./milestone_6.md)
+Please see the next milestone [here.](./streaming-data-pipeline.md)

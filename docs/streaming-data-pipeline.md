@@ -87,7 +87,7 @@ send_to_kinesis(user_result, 'streaming-12c0d092d679-user')
 ```
 
 Run the file in the terminal to continuously send new data to the corresponding Kinesis stream. It should look something like this:
-![streaming-data](../images/m6-img1.png)
+![streaming-data](../images/streaming-data-kinesis-terminal.png)
 
 This will run continously until you interrupt the command.
 
@@ -97,7 +97,7 @@ For now, leave the command running as this ensures enough data is being sent to 
 
 Now the data is being sent to AWS Kinesis. We want to read, clean and write the data to Databricks.
 
-To see the full implementation, please see the notebook [here.](../scripts/milestones/milestone_6.ipynb)
+To see the full implementation, please see the notebook [here.](../scripts/milestones/streaming-data-pipeline.ipynb)
 
 To first read the pin-related data, the necessary libraries are imported and the authentication credentials are obtained (access and secret key).
 
@@ -145,9 +145,9 @@ I checked the contents of the data were uploaded correctly by printing the table
 
 For the next step, we clean the data.
 
-When we processed the data in batches (see [Milestone 3](./milestone_3.md)), we also cleaned the data. Using the same code, we can clean the streaming data in the same way.
+When we processed the data in batches (see [`batch-data-api-configuration.md`](./batch-data-api-configuration.md)), we also cleaned the data. Using the same code, we can clean the streaming data in the same way.
 
-This can be seen in full in [milestone_6.ipynb](../scripts/milestones/milestone_6.ipynb).
+This can be seen in full in [streaming-data-pipeline.ipynb](../scripts/milestones/streaming-data-pipeline.ipynb).
 
 The contents of the data can be printed again to check they have been cleaned correctly.
 
@@ -178,7 +178,7 @@ The same code format is used for `df_geo` and `df_user` with a different query n
 To check data is being uploaded correctly, head to `Catalogs/hive_metastore/default/12c0d092d679_pin_table/Sample Data.`
 
 Below you can see the data has been uploaded after clicking on `Sample Data`
-![sample-data-delta-table](../images/m6-img2.png)
+![sample-data-delta-table](../images/streaming-data-delta-tables.png)
 
 # Conclusion
 

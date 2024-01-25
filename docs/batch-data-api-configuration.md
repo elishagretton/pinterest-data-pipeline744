@@ -10,7 +10,7 @@ In this milestone, we learn:
 - How to add IAM authentication to the MSK cluster and begin the REST proxy on the EC2 machine.
 - How to modify the `user_posting_emulation.py` to send data to the Kafka topics using the API Invoke URL and how to check this.
 
-To view the whole script, please head to [`scripts/milestones/milestone_3.sh.`](../scripts/milestones/milestone_3.sh)
+To view the whole script, please head to [`scripts/milestones/batch-data-api-configuration.sh.`](../scripts/milestones/batch-data-api-configuration.sh)
 
 ## Step 1: Build a Kafka REST proxy integration method for the API
 
@@ -59,9 +59,9 @@ cd confluent-7.2.0/etc/kafka-rest
 nano kafka-rest.properties
 ```
 
-In the `kafka-rest.properties` file, update the `bootstrap.servers` and the `zookeeper.connect` variables with the `Bootstrap server string` and `Plaintext Apache Zookeeper connection string` of the MSK cluster. These were found previously in [Milestone 1.](./milestone_1.md)
+In the `kafka-rest.properties` file, update the `bootstrap.servers` and the `zookeeper.connect` variables with the `Bootstrap server string` and `Plaintext Apache Zookeeper connection string` of the MSK cluster. These were found previously in [`batch-data-ec2-kafka-client.md.`](./batch-data-ec2-kafka-client.md)
 
-The IAM authentication is also added to the file, similar to in [Milestone 1](./milestone_1.md) where the `client.properties` file is created.
+The IAM authentication is also added to the file, similar to in [`batch-data-ec2-kafka-client-configuration.md`](./batch-data-ec2-kafka-client-configuration.md) where the `client.properties` file is created.
 
 The `kafka-rest.properties` file should contain the information as follows:
 
@@ -88,7 +88,7 @@ The proxy is set up correctly when it is clear an INFO server has started and is
 
 ## Step 3: Send data to the API
 
-To send data to the API, the plugin-connector (created in [Milestone 2](./milestone_2.md)) is used to send the batch data to the MSK Cluster.
+To send data to the API, the plugin-connector (created in [`batch-data-msk-s3-connection.md`](./batch-data-msk-s3-connection.md)) is used to send the batch data to the MSK Cluster.
 
 First, ensure the up-to-date API has been deployed and the REST proxy is started on the EC2 client machine.
 
@@ -117,6 +117,6 @@ To check if the topics have been created correctly, head to the S3 section of th
 
 We have successfully configured an API that receives data, which is then sent to the MSK Cluster using the plugin-connector pair previously created.
 
-To see the full script of this section, please see [milestone_3.sh.](../scripts/milestones/milestone_3.sh)
+To see the full script of this section, please see [`batch-data-api-configuration.sh.`](../scripts/milestones/batch-data-api-configuration.sh)
 
-In the next milestone, we set up a Databricks account to read information from AWS. We mount the S3 bucket to Databricks in order to clean and query your batch data. Please see the next milestone [here.](./milestone_4.md)
+In the next milestone, we set up a Databricks account to read information from AWS. We mount the S3 bucket to Databricks in order to clean and query your batch data. Please see the next milestone [here.](./batch-data-workflow-management.md)
